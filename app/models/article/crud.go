@@ -1,6 +1,7 @@
 package article
 
 import (
+	"github.com/13808796047/go-blog/pkg/logger"
 	"github.com/13808796047/go-blog/pkg/model"
 	"github.com/13808796047/go-blog/pkg/types"
 )
@@ -21,4 +22,15 @@ func Get(idstr string) (*Article, error) {
 		return article, err
 	}
 	return article, nil
+}
+
+// Create 创建文章，通过 article.ID 来判断是否创建成功
+func (article *Article) Create() (err error) {
+	result := model.DB.Create(&article)
+	if err = result.Error; err != nil {
+		logger.LogError(err)
+		return err
+	}
+
+	return nil
 }
