@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/13808796047/go-blog/pkg/logger"
 	"github.com/13808796047/go-blog/pkg/route"
+	"github.com/13808796047/go-blog/pkg/types"
 	"github.com/go-sql-driver/mysql"
 	"html/template"
 	"net/http"
@@ -93,7 +94,7 @@ func articlesShowHandler(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.New("show.gohtml").
 			Funcs(template.FuncMap{
 				"RouteName2URL": route.RouteName2URL,
-				"Int64ToString": Int64ToString,
+				"Int64ToString": types.Int64ToString,
 			}).
 			ParseFiles("resources/views/articles/show.gohtml")
 		logger.LogError(err)
