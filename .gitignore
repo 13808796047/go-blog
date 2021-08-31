@@ -10,3 +10,4 @@ vender/
 */.DS_Store
 .vscode
 go.sum
+tmp
