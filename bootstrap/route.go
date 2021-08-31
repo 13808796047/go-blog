@@ -1,8 +1,7 @@
 package bootstrap
 
 import (
-	"goblog/routes"
-
+	"github.com/13808796047/go-blog/routes"
 	"github.com/gorilla/mux"
 )
 

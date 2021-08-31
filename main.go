@@ -435,9 +435,7 @@ func createTables() {
 	logger.LogError(err)
 }
 func main() {
-	database.Initialize()
-	db = database.DB
-	createTables()
+	bootstrap.SetupDB()
 	router = bootstrap.SetupRoute()
 
 	router.HandleFunc("/articles", articlesIndexHandler).Methods("GET").Name("articles.index")
