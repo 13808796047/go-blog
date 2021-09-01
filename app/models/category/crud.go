@@ -3,6 +3,7 @@ package category
 import (
 	"github.com/13808796047/go-blog/pkg/logger"
 	"github.com/13808796047/go-blog/pkg/model"
+	"github.com/13808796047/go-blog/pkg/types"
 )
 
 // All 获取分类数据
@@ -22,4 +23,15 @@ func (category *Category) Create() (err error) {
 	}
 
 	return nil
+}
+
+// Get 通过 ID 获取分类
+func Get(idstr string) (Category, error) {
+	var category Category
+	id := types.StringToInt(idstr)
+	if err := model.DB.First(&category, id).Error; err != nil {
+		return category, err
+	}
+
+	return category, nil
 }

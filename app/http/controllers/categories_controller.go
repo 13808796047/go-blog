@@ -2,8 +2,10 @@ package controllers
 
 import (
 	"fmt"
+	"github.com/13808796047/go-blog/app/models/article"
 	"github.com/13808796047/go-blog/app/models/category"
 	"github.com/13808796047/go-blog/app/requests"
+	"github.com/13808796047/go-blog/pkg/route"
 	"github.com/13808796047/go-blog/pkg/view"
 	"net/http"
 )
@@ -19,8 +21,27 @@ func (c *CategoriesController) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 // Show 显示分类下的文章列表
-func (*CategoriesController) Show(w http.ResponseWriter, r *http.Request) {
-	//
+func (c *CategoriesController) Show(w http.ResponseWriter, r *http.Request) {
+
+	// 1. 获取 URL 参数
+	id := route.GetRouteVariable("id", r)
+
+	// 2. 读取对应的数据
+	_category, err := category.Get(id)
+
+	// 3. 获取结果集
+	articles, pagerData, err := article.GetByCategoryID(_category.GetStringID(), r, 2)
+
+	if err != nil {
+		c.ResponseForSQLError(w, err)
+	} else {
+
+		// ---  2. 加载模板 ---
+		view.Render(w, view.D{
+			"Articles":  articles,
+			"PagerData": pagerData,
+		}, "articles.index", "articles._article_meta")
+	}
 }
 
 // Store 保存文章分类
