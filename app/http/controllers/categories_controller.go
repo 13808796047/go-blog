@@ -18,6 +18,11 @@ func (c *CategoriesController) Create(w http.ResponseWriter, r *http.Request) {
 	view.Render(w, view.D{}, "categories.create")
 }
 
+// Show 显示分类下的文章列表
+func (*CategoriesController) Show(w http.ResponseWriter, r *http.Request) {
+	//
+}
+
 // Store 保存文章分类
 func (c *CategoriesController) Store(w http.ResponseWriter, r *http.Request) {
 	// 1. 初始化数据
