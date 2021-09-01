@@ -11,3 +11,4 @@ vender/
 .vscode
 go.sum
 tmp
+.env

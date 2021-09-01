@@ -1,6 +1,7 @@
 package session
 
 import (
+	"github.com/13808796047/go-blog/pkg/config"
 	"github.com/13808796047/go-blog/pkg/logger"
 	"github.com/gorilla/sessions"
 	"net/http"
@@ -24,7 +25,7 @@ func StartSession(w http.ResponseWriter, r *http.Request) {
 	var err error
 	// Store.Get()的第二个参数是Cookie的名称
 	// gorilla/session支持多会话,本项目我们只使用单一会话即可
-	Session, err = Store.Get(r, "goblog-session")
+	Session, err = Store.Get(r, config.GetString("session.session_name"))
 	logger.LogError(err)
 	Request = r
 	Response = w
