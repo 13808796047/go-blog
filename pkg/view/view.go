@@ -2,6 +2,7 @@ package view
 
 import (
 	"github.com/13808796047/go-blog/pkg/auth"
+	"github.com/13808796047/go-blog/pkg/flash"
 	"github.com/13808796047/go-blog/pkg/logger"
 	"github.com/13808796047/go-blog/pkg/route"
 	"html/template"
@@ -28,7 +29,8 @@ func RenderTemplate(w io.Writer, name string, data D, tplFiles ...string) {
 
 	// 1. 通用模板数据
 	data["isLogined"] = auth.Check()
-
+	data["loginUser"] = auth.User
+	data["flash"] = flash.All()
 	// 2. 生成模板文件
 	allFiles := getTemplateFiles(tplFiles...)
 
