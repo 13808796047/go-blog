@@ -4,7 +4,8 @@ import "github.com/13808796047/go-blog/pkg/config"
 
 func init() {
 	config.Add("app", config.StrMap{
-
+		// 用以生成链接
+		"url": config.Env("APP_URL", "http://localhost:3000"),
 		// 应用名称，暂时没有使用到
 		"name": config.Env("APP_NAME", "GoBlog"),
 
