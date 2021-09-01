@@ -16,12 +16,12 @@ func GetAll() ([]Article, error) {
 
 // Get通过ID获取文章
 func Get(idstr string) (*Article, error) {
-	var article *Article
+	var article Article
 	id := types.StringToInt(idstr)
 	if err := model.DB.First(&article, id).Error; err != nil {
-		return article, err
+		return &article, err
 	}
-	return article, nil
+	return &article, nil
 }
 
 // Create 创建文章，通过 article.ID 来判断是否创建成功
