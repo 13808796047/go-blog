@@ -42,6 +42,10 @@ func RegisterWebRoutes(r *mux.Router) {
 	// 用户认证
 	uc := new(controllers.UserController)
 	r.HandleFunc("/users/{id:[0-9]+}", uc.Show).Methods("GET").Name("users.show")
+	// 文章分类
+	cc := new(controllers.CategoriesController)
+	r.HandleFunc("/categories/create", middlewares.Auth(cc.Create)).Methods("GET").Name("categories.create")
+	r.HandleFunc("/categories", middlewares.Auth(cc.Store)).Methods("POST").Name("categories.store")
 	// 全局中间件
 	r.Use(middlewares.StartSession)
 }
