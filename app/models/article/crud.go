@@ -6,8 +6,8 @@ import (
 	"github.com/13808796047/go-blog/pkg/types"
 )
 
-func GetAll() ([]Article, error) {
-	var articles []Article
+func GetAll() (articles *[]Article, err error) {
+	//var articles []Article
 	if err := model.DB.Preload("User").Find(&articles).Error; err != nil {
 		return articles, err
 	}
@@ -15,13 +15,13 @@ func GetAll() ([]Article, error) {
 }
 
 // Get通过ID获取文章
-func Get(idstr string) (*Article, error) {
-	var article Article
+func Get(idstr string) (article *Article, err error) {
+	//var article Article
 	id := types.StringToInt(idstr)
 	if err := model.DB.Preload("User").First(&article, id).Error; err != nil {
-		return &article, err
+		return article, err
 	}
-	return &article, nil
+	return article, nil
 }
 
 // Create 创建文章，通过 article.ID 来判断是否创建成功

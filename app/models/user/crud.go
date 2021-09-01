@@ -15,12 +15,14 @@ func (user *User) Create() (err error) {
 
 	return nil
 }
-func Get(idstr string) (*User, error) {
-	var user *User
+func Get(idstr string) (User, error) {
+	var user User
 	id := types.StringToInt(idstr)
+
 	if err := model.DB.First(&user, id).Error; err != nil {
 		return user, err
 	}
+
 	return user, nil
 }
 func GetByEmail(idstr string) (*User, error) {

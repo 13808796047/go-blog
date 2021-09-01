@@ -17,16 +17,17 @@ func _getUID() string {
 }
 
 // User 获取登录用户信息
-func User() *user.User {
+func User() user.User {
 	uid := _getUID()
 	if len(uid) > 0 {
 		_user, err := user.Get(uid)
-		if err != nil {
+		if err == nil {
 			return _user
 
 		}
 	}
-	return &user.User{}
+	return user.User{}
+
 }
 
 // Attempt 尝试登录
